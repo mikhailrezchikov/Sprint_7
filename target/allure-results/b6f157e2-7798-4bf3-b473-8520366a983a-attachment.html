@@ -1,0 +1,47 @@
+<div>POST to https://qa-scooter.praktikum-services.ru/api/v1/orders</div>
+
+<h4>Body</h4>
+<div>
+    <pre class="preformated-text">
+    {
+    &quot;rentTime&quot;: 9,
+    &quot;color&quot;: [
+        &quot;GREY&quot;,
+        &quot;BLACK&quot;
+    ],
+    &quot;comment&quot;: &quot;Chuck Norris can read all encrypted data, because nothing can hide from Chuck Norris.&quot;,
+    &quot;deliveryDate&quot;: &quot;Fri Feb 14 10:22:44 GMT+03:00 2025&quot;,
+    &quot;phone&quot;: &quot;1-919-824-9956&quot;,
+    &quot;metroStation&quot;: 1,
+    &quot;address&quot;: &quot;Suite 539 73856 Marguerita Turnpike, Lake Mikel, FL 54688-8055&quot;,
+    &quot;lastName&quot;: &quot;Wiegand&quot;,
+    &quot;firstName&quot;: &quot;Richie&quot;
+}
+    </pre>
+</div>
+
+<h4>Headers</h4>
+<div>
+        <div>Accept: */*</div>
+        <div>Content-Type: application/json</div>
+</div>
+
+
+
+<h4>Curl</h4>
+<div>
+curl -v -X POST &#39;https://qa-scooter.praktikum-services.ru/api/v1/orders&#39; -H &#39;Accept: */*&#39; -H &#39;Content-Type: application/json&#39; -d &#39;{
+    &quot;rentTime&quot;: 9,
+    &quot;color&quot;: [
+        &quot;GREY&quot;,
+        &quot;BLACK&quot;
+    ],
+    &quot;comment&quot;: &quot;Chuck Norris can read all encrypted data, because nothing can hide from Chuck Norris.&quot;,
+    &quot;deliveryDate&quot;: &quot;Fri Feb 14 10:22:44 GMT+03:00 2025&quot;,
+    &quot;phone&quot;: &quot;1-919-824-9956&quot;,
+    &quot;metroStation&quot;: 1,
+    &quot;address&quot;: &quot;Suite 539 73856 Marguerita Turnpike, Lake Mikel, FL 54688-8055&quot;,
+    &quot;lastName&quot;: &quot;Wiegand&quot;,
+    &quot;firstName&quot;: &quot;Richie&quot;
+}&#39;
+</div>

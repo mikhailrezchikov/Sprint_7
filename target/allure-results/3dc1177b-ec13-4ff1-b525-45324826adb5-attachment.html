@@ -1,0 +1,45 @@
+<div>POST to https://qa-scooter.praktikum-services.ru/api/v1/orders</div>
+
+<h4>Body</h4>
+<div>
+    <pre class="preformated-text">
+    {
+    &quot;rentTime&quot;: 4,
+    &quot;color&quot;: [
+        &quot;GREY&quot;
+    ],
+    &quot;comment&quot;: &quot;There is no need to try catching Chuck Norris&#39; exceptions for recovery; every single throw he does is fatal.&quot;,
+    &quot;deliveryDate&quot;: &quot;Tue Feb 18 18:41:56 GMT+03:00 2025&quot;,
+    &quot;phone&quot;: &quot;1-387-713-8746&quot;,
+    &quot;metroStation&quot;: 5,
+    &quot;address&quot;: &quot;Suite 185 6853 Turner Trace, Vidafort, NH 89865-0548&quot;,
+    &quot;lastName&quot;: &quot;Bode&quot;,
+    &quot;firstName&quot;: &quot;Mitchel&quot;
+}
+    </pre>
+</div>
+
+<h4>Headers</h4>
+<div>
+        <div>Accept: */*</div>
+        <div>Content-Type: application/json</div>
+</div>
+
+
+
+<h4>Curl</h4>
+<div>
+curl -v -X POST &#39;https://qa-scooter.praktikum-services.ru/api/v1/orders&#39; -H &#39;Accept: */*&#39; -H &#39;Content-Type: application/json&#39; -d &#39;{
+    &quot;rentTime&quot;: 4,
+    &quot;color&quot;: [
+        &quot;GREY&quot;
+    ],
+    &quot;comment&quot;: &quot;There is no need to try catching Chuck Norris&#39; exceptions for recovery; every single throw he does is fatal.&quot;,
+    &quot;deliveryDate&quot;: &quot;Tue Feb 18 18:41:56 GMT+03:00 2025&quot;,
+    &quot;phone&quot;: &quot;1-387-713-8746&quot;,
+    &quot;metroStation&quot;: 5,
+    &quot;address&quot;: &quot;Suite 185 6853 Turner Trace, Vidafort, NH 89865-0548&quot;,
+    &quot;lastName&quot;: &quot;Bode&quot;,
+    &quot;firstName&quot;: &quot;Mitchel&quot;
+}&#39;
+</div>

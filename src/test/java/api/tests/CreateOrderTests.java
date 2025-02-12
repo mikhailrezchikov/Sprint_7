@@ -1,9 +1,7 @@
 package api.tests;
 
-import api.client.ScooterServiceClient;
+import api.client.ScooterServiceClientOrderApi;
 import api.data.TestData;
-import io.qameta.allure.restassured.AllureRestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Test;
@@ -14,9 +12,10 @@ import java.util.List;
 import java.util.Map;
 
 import static io.qameta.allure.Allure.step;
-import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.apache.http.HttpStatus.*;
+
 
 @RunWith(Parameterized.class)
 public class CreateOrderTests {
@@ -31,8 +30,7 @@ public class CreateOrderTests {
     private final List<String> color;
     protected static final String BASE_URI = "https://qa-scooter.praktikum-services.ru/";
     private int trackId;
-    protected final ScooterServiceClient client = new ScooterServiceClient(BASE_URI);
-
+    protected final ScooterServiceClientOrderApi client = new ScooterServiceClientOrderApi(BASE_URI);
 
     public CreateOrderTests(String firstName, String lastName, String address, int metroStation,
                             String phone, int rentTime, String deliveryDate, String comment, List<String> color) {
@@ -61,7 +59,7 @@ public class CreateOrderTests {
         };
     }
 
-    private Map<String, Object> getOrderData() {
+    private Map<String, Object> getOrdersData() {
         return Map.of(
                 "firstName", firstName,
                 "lastName", lastName,
@@ -77,21 +75,12 @@ public class CreateOrderTests {
 
     @Test
     public void createOrderSuccessfulTest() {
-        ValidatableResponse createOrderResponse = step("Создание заказа", () -> given()
-                .filter(new AllureRestAssured())
-                .log().uri()
-                .log().method()
-                .log().body()
-                .baseUri(BASE_URI)
-                .contentType(ContentType.JSON)
-                .body(getOrderData())
-                .post("/api/v1/orders")
-                .then()
-                .log().body());
+
+        ValidatableResponse createOrderResponse = client.createOrders(getOrdersData());
 
         step("Проверка ответа", () -> {
             createOrderResponse.assertThat()
-                    .statusCode(201)
+                    .statusCode(SC_CREATED)
                     .body("track", is(notNullValue()));
 
             trackId = createOrderResponse.extract().path("track");

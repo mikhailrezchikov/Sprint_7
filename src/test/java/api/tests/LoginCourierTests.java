@@ -9,6 +9,7 @@ import java.security.SecureRandom;
 import static io.qameta.allure.Allure.step;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.apache.http.HttpStatus.*;
 
 public class LoginCourierTests extends CourierTestBase {
 
@@ -25,7 +26,7 @@ public class LoginCourierTests extends CourierTestBase {
 
         step("Проверка ответа", () -> {
             loginCourierResponse.assertThat()
-                    .statusCode(200)
+                    .statusCode(SC_OK)
                     .body("id", notNullValue());
         });
     }
@@ -43,7 +44,7 @@ public class LoginCourierTests extends CourierTestBase {
 
         step("Проверка ответа", () -> {
             loginCourierResponse.assertThat()
-                    .statusCode(400)
+                    .statusCode(SC_BAD_REQUEST)
                     .body("message", equalTo("Недостаточно данных для входа"));
         });
     }
@@ -61,7 +62,7 @@ public class LoginCourierTests extends CourierTestBase {
 
         step("Проверка ответа", () -> {
             loginCourierResponse.assertThat()
-                    .statusCode(400)
+                    .statusCode(SC_BAD_REQUEST)
                     .body("message", equalTo("Недостаточно данных для входа"));
         });
     }
@@ -81,7 +82,7 @@ public class LoginCourierTests extends CourierTestBase {
 
         step("Проверка ответа", () -> {
             loginCourierResponse.assertThat()
-                    .statusCode(404)
+                    .statusCode(SC_NOT_FOUND)
                     .body("message", equalTo("Учетная запись не найдена"));
         });
     }
@@ -101,7 +102,7 @@ public class LoginCourierTests extends CourierTestBase {
 
         step("Проверка ответа", () -> {
             loginCourierResponse.assertThat()
-                    .statusCode(404)
+                    .statusCode(SC_NOT_FOUND)
                     .body("message", equalTo("Учетная запись не найдена"));
         });
     }

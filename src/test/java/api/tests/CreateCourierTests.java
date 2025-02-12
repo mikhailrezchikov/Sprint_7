@@ -1,35 +1,23 @@
 package api.tests;
 
 import api.models.Courier;
-import io.qameta.allure.restassured.AllureRestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 import org.junit.Test;
 
 import static io.qameta.allure.Allure.step;
-import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.apache.http.HttpStatus.*;
 
 public class CreateCourierTests extends CourierTestBase {
 
     @Test
     public void createCourierSuccessfulTest() {
 
-        ValidatableResponse createCourierResponse = step("Создание курьера", () -> given()
-                .filter(new AllureRestAssured())
-                .log().uri()
-                .log().method()
-                .log().body()
-                .baseUri(BASE_URI)
-                .contentType(ContentType.JSON)
-                .body(courier)
-                .post("/api/v1/courier")
-                .then()
-                .log().body());
+        ValidatableResponse createCourierResponse = client.createCourier(courier);
 
         step("Проверка ответа", () -> {
             createCourierResponse.assertThat()
-                    .statusCode(201)
+                    .statusCode(SC_CREATED)
                     .body("ok", equalTo(true));
         });
     }
@@ -37,36 +25,12 @@ public class CreateCourierTests extends CourierTestBase {
     @Test
     public void shouldNotCreateDuplicateCourierTest() {
 
-        step("Создание курьера", () -> given()
-                .filter(new AllureRestAssured())
-                .log().uri()
-                .log().method()
-                .log().body()
-                .baseUri(BASE_URI)
-                .contentType(ContentType.JSON)
-                .body(courier)
-                .post("/api/v1/courier")
-                .then()
-                .log().body());
-
-        Courier duplicateCourier = courier;
-
-        ValidatableResponse createCourierResponse = step("Создание курьера с логином, который уже есть в базе", () -> given()
-                .filter(new AllureRestAssured())
-                .log().uri()
-                .log().method()
-                .log().body()
-                .baseUri(BASE_URI)
-                .contentType(ContentType.JSON)
-                .body(duplicateCourier)
-                .post("/api/v1/courier")
-                .then()
-                .log().body());
-
+        client.createCourier(courier);
+        ValidatableResponse createDuplicateCourierResponse = client.createCourier(courier);
 
         step("Проверка ответа", () -> {
-            createCourierResponse.assertThat()
-                    .statusCode(409)
+            createDuplicateCourierResponse.assertThat()
+                    .statusCode(SC_CONFLICT)
                     .body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
         });
     }
@@ -80,21 +44,11 @@ public class CreateCourierTests extends CourierTestBase {
                 courier.getFirstName()
         );
 
-        ValidatableResponse createCourierResponse = step("Создание курьера", () -> given()
-                .filter(new AllureRestAssured())
-                .log().uri()
-                .log().method()
-                .log().body()
-                .baseUri(BASE_URI)
-                .contentType(ContentType.JSON)
-                .body(courierWithoutLogin)
-                .post("/api/v1/courier")
-                .then()
-                .log().body());
+        ValidatableResponse createCourierResponse = client.createCourier(courierWithoutLogin);
 
         step("Проверка ответа", () -> {
             createCourierResponse.assertThat()
-                    .statusCode(400)
+                    .statusCode(SC_BAD_REQUEST)
                     .body("message", equalTo("Недостаточно данных для создания учетной записи"));
         });
     }
@@ -108,21 +62,11 @@ public class CreateCourierTests extends CourierTestBase {
                 courier.getFirstName()
         );
 
-        ValidatableResponse createCourierResponse = step("Создание курьера", () -> given()
-                .filter(new AllureRestAssured())
-                .log().uri()
-                .log().method()
-                .log().body()
-                .baseUri(BASE_URI)
-                .contentType(ContentType.JSON)
-                .body(courierWithoutPassword)
-                .post("/api/v1/courier")
-                .then()
-                .log().body());
+        ValidatableResponse createCourierResponse = client.createCourier(courierWithoutPassword);
 
         step("Проверка ответа", () -> {
             createCourierResponse.assertThat()
-                    .statusCode(400)
+                    .statusCode(SC_BAD_REQUEST)
                     .body("message", equalTo("Недостаточно данных для создания учетной записи"));
         });
     }

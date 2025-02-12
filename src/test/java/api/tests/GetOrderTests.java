@@ -1,6 +1,6 @@
 package api.tests;
 
-import api.client.ScooterServiceClient;
+import api.client.ScooterServiceClientOrderApi;
 import api.models.OrderResponse;
 import org.junit.Test;
 
@@ -10,6 +10,7 @@ import static io.qameta.allure.Allure.step;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
+import static org.apache.http.HttpStatus.*;
 
 
 public class GetOrderTests {
@@ -19,11 +20,11 @@ public class GetOrderTests {
     @Test
     public void getOrdersTest() {
 
-        ScooterServiceClient client = new ScooterServiceClient(BASE_URI);
+        ScooterServiceClientOrderApi client = new ScooterServiceClientOrderApi(BASE_URI);
 
         List<OrderResponse> orderResponse = client
                 .getOrders()
-                .statusCode(200)
+                .statusCode(SC_OK)
                 .extract()
                 .jsonPath().getList("orders", OrderResponse.class);
 

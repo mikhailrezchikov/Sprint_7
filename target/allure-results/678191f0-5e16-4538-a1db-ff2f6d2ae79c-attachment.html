@@ -1,0 +1,47 @@
+<div>POST to https://qa-scooter.praktikum-services.ru/api/v1/orders</div>
+
+<h4>Body</h4>
+<div>
+    <pre class="preformated-text">
+    {
+    &quot;firstName&quot;: &quot;Hyacinth&quot;,
+    &quot;lastName&quot;: &quot;Abernathy&quot;,
+    &quot;address&quot;: &quot;30184 Joanie Island, West Pamela, MT 63172&quot;,
+    &quot;metroStation&quot;: 8,
+    &quot;phone&quot;: &quot;1-695-948-8641&quot;,
+    &quot;deliveryDate&quot;: &quot;Mon Feb 17 00:04:38 GMT+03:00 2025&quot;,
+    &quot;comment&quot;: &quot;Chuck Norris doesn&#39;t bug hunt, as that signifies a probability of failure. He goes bug killing.&quot;,
+    &quot;color&quot;: [
+        &quot;GREY&quot;,
+        &quot;BLACK&quot;
+    ],
+    &quot;rentTime&quot;: 0
+}
+    </pre>
+</div>
+
+<h4>Headers</h4>
+<div>
+        <div>Accept: */*</div>
+        <div>Content-Type: application/json</div>
+</div>
+
+
+
+<h4>Curl</h4>
+<div>
+curl -v -X POST &#39;https://qa-scooter.praktikum-services.ru/api/v1/orders&#39; -H &#39;Accept: */*&#39; -H &#39;Content-Type: application/json&#39; -d &#39;{
+    &quot;firstName&quot;: &quot;Hyacinth&quot;,
+    &quot;lastName&quot;: &quot;Abernathy&quot;,
+    &quot;address&quot;: &quot;30184 Joanie Island, West Pamela, MT 63172&quot;,
+    &quot;metroStation&quot;: 8,
+    &quot;phone&quot;: &quot;1-695-948-8641&quot;,
+    &quot;deliveryDate&quot;: &quot;Mon Feb 17 00:04:38 GMT+03:00 2025&quot;,
+    &quot;comment&quot;: &quot;Chuck Norris doesn&#39;t bug hunt, as that signifies a probability of failure. He goes bug killing.&quot;,
+    &quot;color&quot;: [
+        &quot;GREY&quot;,
+        &quot;BLACK&quot;
+    ],
+    &quot;rentTime&quot;: 0
+}&#39;
+</div>
